@@ -40,8 +40,13 @@ export class LoginComponent {
           localStorage.setItem("jwt", token);
           this.userService.getAccountBootstrap().subscribe();
           this.invalidLogin = false;
-          this.toastr.success("Logged In successfully");
-          this.router.navigate(["/dashboard"]);
+          setTimeout(() => {
+            if(this.userService.user?.role === "user") {
+              this.router.navigate(["/lich-su-ban-giao"]);
+            }else {
+              this.router.navigate(["/dashboard"]);
+            }
+          },100);
         },
         (err) => {
           this.invalidLogin = true;

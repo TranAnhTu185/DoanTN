@@ -1,6 +1,6 @@
 <nz-layout class="layout">
   <nz-sider nzCollapsible nzWidth="200px">
-    <div class="logo"><img src="/assets/logo2.png" alt="logo" /></div>
+    <div class="logo"><img style="width: 60px;" src="/assets/logo.png" alt="logo" /></div>
     <ul nz-menu nzTheme="dark" nzMode="inline">
       <li nz-menu-item routerLink="" 
       *ngIf="
@@ -25,7 +25,7 @@
           </li>
         </ul>
       </li>
-      <li nz-submenu nzIcon="shop" nzTitle="Quản lý phiếu" nzOpen>
+      <li nz-submenu nzIcon="shop" nzTitle="Quản lý phiếu" nzOpen *ngIf="userService.user?.role != 'admin'">
         <ul>
           <li
             nz-menu-item
@@ -201,7 +201,7 @@
       <router-outlet></router-outlet>
     </nz-content>
     <nz-footer
-      >Copyright © 2023 benhviennoitiet.vn. All Rights Reserved</nz-footer
+      >Copyright © 2023. All Rights Reserved</nz-footer
     >
   </nz-layout>
 </nz-layout>

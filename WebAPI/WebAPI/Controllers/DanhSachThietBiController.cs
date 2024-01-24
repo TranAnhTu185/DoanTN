@@ -80,7 +80,9 @@ namespace WebAPI.Controllers
             var nhanVienId = _context.NhanSu.First(_ => _.AccountId == userId).Id;
             if (phongBan.Count > 0)
             {
-                var totalCount = phongBan.Count;
+                var list = (phongBan.Where(_ => string.IsNullOrEmpty(input.Filter) || _.Ma.Contains(input.Filter))
+                    .Where(x => x.NhanVienId == nhanVienId)).ToList();
+                var totalCount = list.Count;
                 var items = phongBan.Where(_ => string.IsNullOrEmpty(input.Filter) || _.Ma.Contains(input.Filter))
                     .Where(x => x.NhanVienId == nhanVienId)
                     .Skip(input.SkipCount ?? 0).Take(input.MaxResultCount ?? 1000)

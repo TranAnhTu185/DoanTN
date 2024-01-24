@@ -38,42 +38,39 @@ export class HomepageComponent implements OnInit {
 
 
   ngOnInit(): void {
-    if(this.userService.user?.role == 'user') {
-      this.router.navigate(['/lich-su-ban-giao']);
-    }else {
-      this.service.getDashBoard().subscribe(val => {
-        this.danhSach = val;
-      })
-      this.service.getDashBoardChart().subscribe(data => {
-        const seriesArr: number[] = [];
-        const labelArr: string[] = [];
-        data.forEach(item => {
-          seriesArr.push(item.value);
-          labelArr.push(item.category);
-        });
-        this.chartOptions = {
-          series: seriesArr,
-          chart: {
-            width: 380,
-            type: "pie"
-          },
-          labels: labelArr,
-          responsive: [
-            {
-              breakpoint: 480,
-              options: {
-                chart: {
-                  width: 200
-                },
-                legend: {
-                  position: "center"
-                }
+
+    this.service.getDashBoard().subscribe(val => {
+      this.danhSach = val;
+    })
+    this.service.getDashBoardChart().subscribe(data => {
+      const seriesArr: number[] = [];
+      const labelArr: string[] = [];
+      data.forEach(item => {
+        seriesArr.push(item.value);
+        labelArr.push(item.category);
+      });
+      this.chartOptions = {
+        series: seriesArr,
+        chart: {
+          width: 380,
+          type: "pie"
+        },
+        labels: labelArr,
+        responsive: [
+          {
+            breakpoint: 480,
+            options: {
+              chart: {
+                width: 200
+              },
+              legend: {
+                position: "center"
               }
             }
-          ]
-        };
-      })
-    }
+          }
+        ]
+      };
+    })
   }
 
   isUserAuthenticated() {
